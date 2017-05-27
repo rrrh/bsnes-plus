@@ -13,8 +13,8 @@ version := v073+3a
 # compiler
 c       := $(compiler) -xc -std=gnu99
 cpp     := $(compiler) -std=gnu++0x
-flags   := -I. -I$(snes)
-link    :=
+flags   := -I. -I$(snes) -I/opt//local/libexec/qt4/Library/Frameworks/QtGui.framework/Versions/4/Headers/ -I/opt//local/libexec/qt4/Library/Frameworks/QtCore.framework/Versions/4/Headers/ -I/opt//local/libexec/qt4/Library/Frameworks/QtGui.framework/Versions/4/Headers/help -I/opt//local/libexec/qt4/Library/Frameworks/QtCore.framework/Versions/4/Headers/help -I/opt//local/libexec/qt4/Library/Frameworks/QtOpenGL.framework/Versions/4/Headers/ -I/opt//local/libexec/qt4/Library/Frameworks/QtOpenGL.framework/Versions/4/Headers/help
+link    := -F/opt//local/libexec/qt4/Library/Frameworks/
 objects :=
 
 ifeq ($(DEBUG), 1)
@@ -113,14 +113,14 @@ endif
 plugins: build
 	@$(MAKE) -C ../snesreader
 	@$(MAKE) -C ../snesfilter
-	@$(MAKE) -C ../snesmusic
 	@$(MAKE) -C ../supergameboy
+#	@$(MAKE) -C ../snesmusic
 ifeq ($(platform),osx)
 	mkdir -p $(osxbundle)/Contents/Frameworks
 	cp -f ../snesreader/libsnesreader.dylib $(osxbundle)/Contents/Frameworks/libsnesreader.dylib
 	cp -f ../snesfilter/libsnesfilter.dylib $(osxbundle)/Contents/Frameworks/libsnesfilter.dylib
-	cp -f ../snesfilter/libsnesmusic.dylib $(osxbundle)/Contents/Frameworks/libsnesmusic.dylib
 	cp -f ../supergameboy/libsupergameboy.dylib $(osxbundle)/Contents/Frameworks/libsupergameboy.dylib
+#	cp -f ../snesfilter/libsnesmusic.dylib $(osxbundle)/Contents/Frameworks/libsnesmusic.dylib
 endif
 
 distribution: clean build plugins

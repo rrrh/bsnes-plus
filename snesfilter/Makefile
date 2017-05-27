@@ -5,8 +5,9 @@ include nall/qt/Makefile
 
 c     := $(compiler) -xc -std=gnu99
 cpp   := $(compiler) -std=gnu++0x
-flags := -I. -Iobj $(qtinc)
-link  :=
+flags := -I. -Iobj $(qtinc) -I/opt//local/libexec/qt4/Library/Frameworks/QtGui.framework/Versions/4/Headers/ -I/opt//local/libexec/qt4/Library/Frameworks/QtCore.framework/Versions/4/Headers/ -I/opt//local/libexec/qt4/Library/Frameworks/QtGui.framework/Versions/4/Headers/help -I/opt//local/libexec/qt4/Library/Frameworks/QtCore.framework/Versions/4/Headers/help -I/opt//local/libexec/qt4/Library/Frameworks/QtOpenGL.framework/Versions/4/Headers/ -I/opt//local/libexec/qt4/Library/Frameworks/QtOpenGL.framework/Versions/4/Headers/help
+link    := -F/opt//local/libexec/qt4/Library/Frameworks/
+link  := -F/opt//local/libexec/qt4/Library/Frameworks/
 
 ifeq ($(DEBUG), 1)
   flags += -O0 -g
